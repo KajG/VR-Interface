@@ -18,20 +18,24 @@ public class Inventory : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.A)) {
 			if (inventory.ContainsKey (word)) {
 				inventory [word] += numb;
-			} else {
+			} else if (itemdatabase.CheckItem(word)) {
 				inventory.Add (word, numb);
 				inventoryui.AddItem (word);
+			} else {
+				return;
 			}
+			inventoryui.UpdateUI ();
 		}
 		if (Input.GetKeyDown (KeyCode.D)) {
 			if (CheckItem ()) {
-				Instantiate (itemdatabase.GetItemObject (word), new Vector3 (0, 0, 0), Quaternion.identity);
+				Instantiate (itemdatabase.GetItemObject (word), new Vector3 (-5, 0, 0), Quaternion.identity);
 				inventory [word]--;
 				if (inventory [word] <= 0) {
 					inventory.Remove (word);
 					inventoryui.RemoveItem (word);
 				}
 			}
+			inventoryui.UpdateUI ();
 		}
 	}
 	public bool CheckItem(){

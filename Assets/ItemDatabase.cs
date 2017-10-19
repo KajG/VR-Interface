@@ -14,4 +14,11 @@ public class ItemDatabase : MonoBehaviour{
 			return null;
 		}
 	}
+	public bool CheckItem(string name){
+		if (items.Contains (name)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
