@@ -9,6 +9,7 @@ public class Inventory : MonoBehaviour {
 	public string word;
 	public ItemDatabase itemdatabase;
 	public InventoryUI inventoryui;
+	public bool active;
 	void Start () {
 		itemdatabase = GameObject.Find ("Main Camera").GetComponent<ItemDatabase> ();
 		inventoryui = GameObject.Find ("Main Camera").GetComponent<InventoryUI> ();
@@ -36,6 +37,14 @@ public class Inventory : MonoBehaviour {
 				}
 			}
 			inventoryui.UpdateUI ();
+		}
+		if (Input.GetKeyDown (KeyCode.S)) {
+			if (!active) {
+				inventoryui.HideInventory ();
+			} else {
+				active = false;
+				inventoryui.UpdateUI ();
+			}
 		}
 	}
 	public bool CheckItem(){
